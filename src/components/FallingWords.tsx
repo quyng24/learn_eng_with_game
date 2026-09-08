@@ -22,11 +22,6 @@ export default function FallingWords() {
               willChange: "top",
             }}
           >
-            {/* Reticle indicator above word when targeted */}
-            {isTargeted && (
-              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee] mb-1 animate-ping" />
-            )}
-
             <div
               className={`px-4 py-1.5 rounded-xl backdrop-blur-md transition-all duration-150 shadow-lg ${
                 isTargeted

@@ -29,7 +29,7 @@ const generateWordInstance = (word: typeof VOCABULARY[number], level: number): A
     ...word,
     id: `${word.id}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     x: Math.floor(Math.random() * 70) + 15,
-    y: -10,
+    y: 0,
     speed: getDynamicSpeed(level),
 });
 

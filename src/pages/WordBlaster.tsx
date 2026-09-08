@@ -53,21 +53,23 @@ export default function WordBlaster() {
         {explosions.map((exp) => (
           <div
             key={exp.id}
-            className="absolute flex flex-col items-center pointer-events-none animate-bounce"
+            className="absolute pointer-events-none"
             style={{
               left: `${exp.x}%`,
               top: `${exp.y}%`,
               transform: "translate(-50%, -50%)",
             }}
           >
-            <div className="text-4xl text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.8)]">
-              💥
-            </div>
-            <div className="text-xl font-black text-green-400 drop-shadow-md">
-              +{exp.earnedScore}
-            </div>
-            <div className="text-sm font-bold text-yellow-300 opacity-80">
-              {exp.text}
+            <div className="flex flex-col items-center animate-bounce">
+              <div className="text-4xl text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.8)]">
+                💥
+              </div>
+              <div className="text-xl font-black text-green-400 drop-shadow-md">
+                +{exp.earnedScore}
+              </div>
+              <div className="text-sm font-bold text-yellow-300 opacity-80">
+                {exp.text}
+              </div>
             </div>
           </div>
         ))}
