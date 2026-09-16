@@ -168,7 +168,9 @@ export const useGameEngineState = () => {
         if (gameState.status !== "playing") return;
 
         const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === " ") e.preventDefault();
             if (e.key.length > 1 && e.key !== "Backspace") return;
+    
             setGameState((prev) => {
                 if (prev.status !== "playing") return prev;
 
@@ -176,13 +178,15 @@ export const useGameEngineState = () => {
 
                 if (e.key === "Backspace") {
                     newInput = newInput.slice(0, -1);
-                } else if (/^[a-zA-Z]$/.test(e.key)) {
+                } 
+                else if (/^[a-zA-Z ]$/.test(e.key)) {
                     newInput += e.key.toLowerCase();
-                } else {
+                } 
+                else {
                     return prev; 
                 }
 
-                const matchedWordIndex = prev.activeWords.findIndex((w) => w.text === newInput);
+                const matchedWordIndex = prev.activeWords.findIndex((w) => w.text.toLowerCase() === newInput);
 
                 if (matchedWordIndex !== -1) {
                     const newActiveWords = [...prev.activeWords];
@@ -195,7 +199,7 @@ export const useGameEngineState = () => {
                     const newLevel = Math.floor(newScore / 500) + 1; 
 
                     const newExplosion: Explosion = {
-                        id: Date.now().toString(),
+                        id: Date.now().toString() + Math.random().toString(36).substring(2, 5),
                         x: matchedWord.x,
                         y: matchedWord.y,
                         text: matchedWord.text,

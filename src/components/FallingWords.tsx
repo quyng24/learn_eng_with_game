@@ -9,7 +9,8 @@ export default function FallingWords() {
     <>
       {activeWords.map((word) => {
         const isTargeted =
-          word.text.startsWith(currentInput) && currentInput.length > 0;
+          word.text.toLowerCase().startsWith(currentInput.toLowerCase()) &&
+          currentInput.length > 0;
 
         return (
           <div
@@ -23,11 +24,13 @@ export default function FallingWords() {
             }}
           >
             <div
-              className={`px-4 py-1.5 rounded-xl backdrop-blur-md transition-all duration-150 shadow-lg ${
-                isTargeted
-                  ? "bg-slate-900/95 border-2 border-cyan-400 ring-4 ring-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.4)] scale-105"
-                  : "bg-slate-900/85 border border-slate-700/80 text-slate-200 shadow-black/40"
-              }`}
+              className={`whitespace-pre text-xl sm:text-2xl font-mono px-3.5 py-1.5 rounded-xl border backdrop-blur-md transition-all duration-75
+                ${
+                  isTargeted
+                    ? "bg-cyan-950/90 border-cyan-400 scale-110 shadow-[0_0_30px_rgba(6,182,212,0.7)]"
+                    : "bg-slate-900/90 border-slate-700/80 shadow-lg"
+                }
+              `}
             >
               <div className="font-mono text-xl tracking-wider flex items-center">
                 {isTargeted ? (
