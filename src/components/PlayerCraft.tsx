@@ -6,6 +6,7 @@ import { Terminal } from "lucide-react";
 export default function PlayerCraft() {
   const { gameState } = useGameEngine();
   const { currentInput } = gameState;
+  const isShooting = currentInput.length > 0;
   return (
     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 pointer-events-none">
       {/* Input Display Cockpit */}
@@ -26,7 +27,9 @@ export default function PlayerCraft() {
       </div>
 
       {/* Futuristic Vector Spaceship */}
-      <div className="relative flex flex-col items-center">
+      <div
+        className={`relative flex flex-col items-center ${isShooting ? "scale-90 translate-y-1" : "animate-bounce"}`}
+      >
         {/* Twin Laser Guides */}
         <div className="absolute -top-5 flex justify-between w-9 opacity-75">
           <div className="w-0.5 h-5 bg-linear-to-t from-cyan-400 to-transparent animate-pulse" />
@@ -86,7 +89,9 @@ export default function PlayerCraft() {
         </svg>
 
         {/* Plasma Thruster Glow */}
-        <div className="w-2.5 h-4 bg-linear-to-b from-cyan-300 via-blue-500 to-transparent rounded-full blur-[1px] -mt-1 animate-pulse" />
+        <div
+          className={`w-2.5 h-4 bg-linear-to-b from-cyan-300 via-blue-500 to-transparent rounded-full blur-[1px] -mt-1 animate-pulse ${isShooting ? "opacity-100" : "opacity-50"}`}
+        />
       </div>
     </div>
   );

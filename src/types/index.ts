@@ -25,6 +25,7 @@ export interface GameStatePhase2 extends Omit<GameState, 'status'> {
     status: "idle" | "playing" | "game-over";
     level: number;
     explosions: Explosion[];
+    selectedTopicId: string | null;
 }
 
 export interface Explosion {

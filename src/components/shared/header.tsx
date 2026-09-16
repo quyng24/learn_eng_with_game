@@ -1,5 +1,5 @@
 import { Rocket, Trophy, Flame, Heart } from "lucide-react";
-import { useGameEngine } from "@/hooks/useGameEngine"; // Điều chỉnh lại đường dẫn nếu cần
+import { useGameEngine } from "@/hooks/useGameEngine";
 
 export default function Header() {
   const { gameState } = useGameEngine();
@@ -7,7 +7,6 @@ export default function Header() {
 
   return (
     <header className="absolute top-0 inset-x-0 px-6 py-4 flex items-center justify-between bg-linear-to-b from-slate-950/90 to-transparent z-10 pointer-events-none">
-      {/* Container dùng Grid 3 cột để đảm bảo phần Giữa luôn căn giữa màn hình */}
       <div className="grid grid-cols-3 w-full items-center">
         {/* L E F T : Branding & Level */}
         <div className="flex items-center gap-3 justify-start">
@@ -24,7 +23,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* C E N T E R : Score & Combo (Focus của người chơi) */}
+        {/* C E N T E R : Score & Combo */}
         <div className="flex flex-col items-center justify-center relative">
           <div className="flex items-baseline gap-2">
             <Trophy className="w-5 h-5 text-amber-400 hidden sm:block" />
@@ -33,7 +32,7 @@ export default function Header() {
             </span>
           </div>
 
-          {/* Combo Badge - Đặt lơ lửng ngay dưới điểm số để dễ chú ý */}
+          {/* Combo Badge */}
           <div className="h-6 mt-1">
             {combo > 1 && (
               <div className="flex items-center gap-1.5 bg-orange-500/20 px-3 py-0.5 rounded-full border border-orange-500/40 animate-pulse">
