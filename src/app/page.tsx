@@ -1,134 +1,225 @@
 import Link from "next/link";
 import {
   Gamepad2,
-  Rocket,
-  Brain,
-  Sparkles,
-  Monitor,
+  Zap,
+  BrainCircuit,
+  ShieldCheck,
+  Map,
+  Terminal,
   ArrowRight,
-  Lock,
+  Flame,
+  Swords,
+  Globe,
 } from "lucide-react";
-
-export default function LingoGamesHub() {
+export default function LingoHubLanding() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white font-sans selection:bg-cyan-500/30">
-      {/* 🌌 Background Effects */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-125 h-125 bg-cyan-500/10 rounded-full blur-[120px] mix-blend-screen"></div>
-        <div className="absolute bottom-0 left-0 w-125 h-125 bg-indigo-600/10 rounded-full blur-[120px] mix-blend-screen"></div>
-        <div className="absolute inset-0 bg-[url('https://transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
-      </div>
-
-      {/* 🚀 Navigation / Header */}
-      <nav className="relative z-10 flex items-center justify-between px-6 lg:px-12 py-6 border-b border-white/5 bg-slate-950/50 backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-linear-to-tr from-cyan-500 to-blue-600 flex items-center justify-center">
-            <Gamepad2 className="w-6 h-6 text-white" />
+    <main className="min-h-screen bg-zinc-950 text-zinc-300 font-sans selection:bg-emerald-500/30">
+      {/* 🚀 NAVIGATION */}
+      <nav className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-emerald-500 flex items-center justify-center">
+              <Gamepad2 className="w-6 h-6 text-zinc-950" />
+            </div>
+            <span className="text-xl font-black tracking-widest text-white uppercase">
+              Lingo<span className="text-emerald-500 font-normal">Hub</span>
+            </span>
           </div>
-          <span className="text-xl font-black tracking-widest uppercase">
-            Lingo<span className="text-cyan-400">Arcade</span>
-          </span>
-        </div>
-        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
-          <Link href="#" className="hover:text-white transition-colors">
-            Trang chủ
-          </Link>
-          <Link href="#" className="hover:text-white transition-colors">
-            Bảng xếp hạng
-          </Link>
-          <Link href="#" className="hover:text-white transition-colors">
-            Hồ sơ
-          </Link>
+          <div className="hidden md:flex gap-8 text-xs font-mono tracking-widest uppercase text-zinc-500">
+            <Link
+              href="#benefits"
+              className="hover:text-emerald-400 transition-colors"
+            >
+              Lợi Ích
+            </Link>
+            <Link
+              href="#roadmap"
+              className="hover:text-emerald-400 transition-colors"
+            >
+              Hệ Sinh Thái
+            </Link>
+            <Link
+              href="/word-blaster"
+              className="text-white hover:text-emerald-400 transition-colors"
+            >
+              Vào Game
+            </Link>
+          </div>
         </div>
       </nav>
-
-      {/* 🎯 Hero Section */}
-      <section className="relative z-10 px-6 py-20 lg:py-32 flex flex-col items-center text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-semibold mb-6">
-          <Sparkles className="w-4 h-4" /> Tổ hợp Game Học Tiếng Anh thế hệ mới
+      {/* 🎯 HERO SECTION */}
+      <section className="relative border-b border-zinc-800 overflow-hidden">
+        {/* Background Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
+        <div className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 flex flex-col items-start">
+          <div className="inline-flex items-center gap-2 px-3 py-1 border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono uppercase tracking-wider mb-8">
+            <Flame className="w-4 h-4" /> Hệ sinh thái Daily English &
+            Gamification
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tighter mb-8 max-w-5xl">
+            CHINH PHỤC TIẾNG ANH <br />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-500">
+              BẮT ĐẦU TỪ CẤP ĐỘ 1.
+            </span>
+          </h1>
+          <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-12 leading-relaxed">
+            Quên đi những giờ học nhồi nhét khô khan. Khám phá tổ hợp giải trí -
+            học tập, nơi thói quen mỗi ngày (Daily) và niềm vui vượt ải (Gaming)
+            hợp nhất để biến Tiếng Anh thành phản xạ tự nhiên.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <button className="px-8 py-5 bg-emerald-500 text-zinc-950 font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:bg-emerald-400 transition-all">
+              Tạo Nhân Vật Ngay <ArrowRight className="w-5 h-5" />
+            </button>
+            <button className="px-8 py-5 bg-transparent border-2 border-zinc-700 text-white font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:border-zinc-500 transition-all">
+              <Terminal className="w-5 h-5" />
+              Xem Lộ Trình
+            </button>
+          </div>
         </div>
-        <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-linear-to-r from-white via-cyan-100 to-blue-200 mb-6 max-w-4xl tracking-tight">
-          Học Từ Vựng Tiếng Anh <br className="hidden md:block" /> Không Còn
-          Nhàm Chán
-        </h1>
-        <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-12">
-          Kết hợp giữa cơ chế Game Arcade gây nghiện và phương pháp học phản xạ
-          ngầm. Chơi vui, nhớ lâu, tăng cường kỹ năng thực chiến.
-        </p>
       </section>
-
-      {/* 🎮 Game List Section */}
-      <section className="relative z-10 px-6 pb-32 max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-bold flex items-center gap-2">
-            <Gamepad2 className="text-cyan-400" /> Danh Sách Trò Chơi
+      {/* 🧩 BENEFITS SECTION */}
+      <section
+        id="benefits"
+        className="max-w-7xl mx-auto border-b border-zinc-800"
+      >
+        <div className="px-6 py-16 border-b border-zinc-800">
+          <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
+            Tại sao lại là Daily + Game?
           </h2>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Card 1: WordBlaster */}
-          <div className="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] flex flex-col">
-            <div className="h-48 bg-slate-800 relative flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 bg-linear-to-tr from-cyan-900/40 to-slate-900"></div>
-              <Rocket className="w-20 h-20 text-cyan-400 group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]" />
-
-              {/* Badge Yêu cầu PC */}
-              <div className="absolute top-4 right-4 bg-slate-950/80 backdrop-blur text-xs font-bold px-2 py-1 rounded border border-slate-700 flex items-center gap-1.5 text-slate-300">
-                <Monitor className="w-3 h-3 text-cyan-400" /> PC Only
-              </div>
-            </div>
-
-            <div className="p-6 flex-1 flex flex-col">
-              <div className="flex gap-2 mb-3">
-                <span className="text-[10px] uppercase font-bold px-2 py-1 rounded bg-cyan-500/10 text-cyan-400">
-                  Từ vựng
-                </span>
-                <span className="text-[10px] uppercase font-bold px-2 py-1 rounded bg-blue-500/10 text-blue-400">
-                  Gõ 10 ngón
-                </span>
-              </div>
-              <h3 className="text-2xl font-black mb-2">WordBlaster</h3>
-              <p className="text-slate-400 text-sm mb-6 flex-1">
-                Luyện phản xạ từ vựng tiếng Anh và tốc độ gõ phím. Bảo vệ tàu vũ
-                trụ khỏi những từ vựng rơi xuống.
-              </p>
-
-              <Link
-                href="/word-blaster"
-                className="w-full py-3 px-4 bg-white text-slate-950 text-center font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-cyan-50 transition-colors"
-              >
-                Chơi Ngay <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+          {/* Benefits */}
+          <div className="p-8 md:p-12 hover:bg-zinc-900/50 transition-colors group">
+            <Zap className="w-10 h-10 text-emerald-500 mb-6 group-hover:scale-110 transition-transform" />
+            <h3 className="text-2xl font-bold text-white mb-4">
+              &quot;Nghiện&quot; Học Nhờ Dopamine
+            </h3>
+            <p className="text-zinc-400 leading-relaxed">
+              Không còn cảm giác ép buộc. Cơ chế vượt ải, tích điểm và thăng
+              hạng liên tục kích thích não bộ tiết ra dopamine, biến việc học
+              thành một niềm vui giải trí mà bạn muốn quay lại mỗi ngày.
+            </p>
           </div>
-
-          {/* Card 2: Placeholder Game 2 */}
-          <div className="bg-slate-900/50 border border-slate-800/50 rounded-2xl overflow-hidden opacity-75 flex flex-col">
-            <div className="h-48 bg-slate-800/50 relative flex items-center justify-center">
-              <Brain className="w-16 h-16 text-slate-600" />
-              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/60 backdrop-blur-sm">
-                <span className="flex items-center gap-2 font-bold text-slate-300 bg-slate-900 px-4 py-2 rounded-full border border-slate-700">
-                  <Lock className="w-4 h-4" /> Sắp ra mắt
-                </span>
-              </div>
-            </div>
-            <div className="p-6">
-              <div className="flex gap-2 mb-3">
-                <span className="text-[10px] uppercase font-bold px-2 py-1 rounded bg-slate-800 text-slate-400">
-                  Ngữ pháp
-                </span>
-              </div>
-              <h3 className="text-2xl font-black mb-2 text-slate-300">
-                Grammar Ninja
-              </h3>
-              <p className="text-slate-500 text-sm">
-                Chém đứt các lỗi sai ngữ pháp với tốc độ của một Ninja. Phù hợp
-                luyện thi TOEIC/IELTS.
-              </p>
-            </div>
+          {/* Benefits 2 */}
+          <div className="p-8 md:p-12 hover:bg-zinc-900/50 transition-colors group">
+            <Gamepad2 className="w-10 h-10 text-cyan-500 mb-6 group-hover:scale-110 transition-transform" />
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Mưa Dầm Thấm Lâu
+            </h3>
+            <p className="text-zinc-400 leading-relaxed">
+              Không cần ngồi lỳ hàng giờ. Chỉ với 10-15 phút mỗi ngày thông qua
+              các chuỗi thử thách (Daily streaks), bạn duy trì được sự liên tục
+              — yếu tố quan trọng nhất để làm chủ ngoại ngữ.
+            </p>
+          </div>
+          {/* Benefits 3 */}
+          <div className="p-8 md:p-12 border-t border-zinc-800 hover:bg-zinc-900/50 transition-colors group">
+            <BrainCircuit className="w-10 h-10 text-purple-500 mb-6 group-hover:scale-110 transition-transform" />
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Phản Xạ Nhanh Như Chớp
+            </h3>
+            <p className="text-zinc-400 leading-relaxed">
+              Trong game, bạn không có thời gian để dịch từ Tiếng Việt sang
+              Tiếng Anh. Các thử thách ép thời gian sẽ rèn luyện cho não bộ khả
+              năng phản xạ và tư duy trực tiếp bằng Tiếng Anh.
+            </p>
+          </div>
+          {/* Benefits */}
+          <div className="p-8 md:p-12 border-t border-zinc-800 hover:bg-zinc-900/50 transition-colors group">
+            <ShieldCheck className="w-10 h-10 text-orange-500 mb-6 group-hover:scale-110 transition-transform" />
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Môi Trường An Toàn Để Sai
+            </h3>
+            <p className="text-zinc-400 leading-relaxed">
+              &quot;Game Over&quot; chỉ là cơ hội để chơi lại. Bạn được phép
+              sai, được phép thử lại vô số lần trong một môi trường an toàn,
+              không phán xét. Tự tin giao tiếp bắt nguồn từ đây.
+            </p>
           </div>
         </div>
       </section>
+      {/* 🗺️ ECOSYSTEM VISION SECTION (Roadmap) */}
+      <section
+        id="roadmap"
+        className="max-w-7xl mx-auto px-6 py-20 lg:py-32 border-b border-zinc-800"
+      >
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs font-mono uppercase tracking-wider mb-6">
+            <Map className="w-4 h-4" /> Bản Đồ Mở Rộng
+          </div>
+          <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-6">
+            Không Chỉ Là Một Trò Chơi. <br /> Đây Là &quot;Căn Cứ&quot; Của Bạn.
+          </h2>
+          <p className="text-lg text-zinc-400">
+            Chúng tôi đang xây dựng một vũ trụ học tập không giới hạn. Bạn càng
+            học, thế giới này càng mở rộng.
+          </p>
+        </div>
+        {/* Timeline Grid/Brutalism */}
+        <div className="relative border-l-2 border-zinc-800 ml-4 md:ml-0 md:pl-10 space-y-12">
+          <div className="relative">
+            <div className="absolute -left-8.75 md:-left-11.25 bg-emerald-500 text-zinc-950 px-2 py-1 text-xs font-black uppercase">
+              Now
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2 pl-4 md:pl-0">
+              Giai Đoạn 1: Arcade Zone
+            </h3>
+            <p className="text-zinc-500 pl-4 md:pl-0 max-w-2xl">
+              Ra mắt các Minigame luyện từ vựng và ngữ pháp tốc độ cao
+              (WordBlaster, Grammar Ninja...). Tích hợp Daily Challenge mỗi ngày
+              30 từ vựng cốt lõi.
+            </p>
+          </div>
+          <div className="relative opacity-60">
+            <div className="absolute -left-8.75 md:-left-11.25 bg-zinc-800 text-zinc-400 px-2 py-1 text-xs font-black uppercase">
+              v2.0
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2 pl-4 md:pl-0 flex items-center gap-3">
+              <Swords className="w-5 h-5 text-cyan-500" /> Đấu Trường PvP
+            </h3>
+            <p className="text-zinc-500 pl-4 md:pl-0 max-w-2xl">
+              Chế độ thách đấu 1vs1. Thi gõ từ vựng, nối câu, trả lời phản xạ
+              với những người học khác trên bảng xếp hạng toàn máy chủ.
+            </p>
+          </div>
+          <div className="relative opacity-40">
+            <div className="absolute -left-8.75 md:-left-11.25 bg-zinc-800 text-zinc-400 px-2 py-1 text-xs font-black uppercase">
+              v3.0
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2 pl-4 md:pl-0 flex items-center gap-3">
+              <Globe className="w-5 h-5 text-purple-500" /> Nhập Vai Tình Huống
+              (RPG)
+            </h3>
+            <p className="text-zinc-500 pl-4 md:pl-0 max-w-2xl">
+              Áp dụng kiến thức vào thực tế ảo. Trả lời phỏng vấn xin việc, đàm
+              phán hợp đồng, hoặc gọi món tại nhà hàng qua giọng nói với AI NPC.
+            </p>
+          </div>
+        </div>
+      </section>
+      {/* 🚀 FINAL CTA */}
+      <section className="bg-emerald-500 text-zinc-950">
+        <div className="max-w-7xl mx-auto px-6 py-20 lg:py-32 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">
+              Sẵn sàng phá đảo <br /> rào cản ngôn ngữ?
+            </h2>
+            <p className="text-xl font-medium text-emerald-950">
+              &quot;Bạn không thất bại trong việc học Tiếng Anh, bạn chỉ chưa
+              tìm đúng cách tiếp cận.&quot;
+            </p>
+          </div>
+          <button className="px-10 py-6 bg-zinc-950 text-white font-black uppercase tracking-widest text-lg flex items-center justify-center gap-4 hover:bg-zinc-800 transition-all shrink-0 w-full md:w-auto">
+            <Gamepad2 className="w-6 h-6 text-emerald-500" />
+            Đăng Ký Chơi Thử
+          </button>
+        </div>
+      </section>
+      {/* FOOTER */}
+      <footer className="bg-zinc-950 border-t border-zinc-900 py-8 px-6 text-center text-zinc-600 text-sm font-mono uppercase tracking-widest">
+        © {new Date().getFullYear()} LingoHub. Hệ sinh thái Game & Tiếng Anh.
+      </footer>
     </main>
   );
 }

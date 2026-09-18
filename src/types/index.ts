@@ -36,3 +36,32 @@ export interface Explosion {
     earnedScore: number;
     timeLeft: number;
 }
+
+export type VocabularyDaily = {
+  id: string
+  word: string
+  pronunciation: string
+  partOfSpeech: string
+  meanings: string[]
+  commonPhrases: {
+    phrase: string
+    meaning: string
+  }[]
+  examples: {
+    sentence: string
+    translation: string
+  }[]
+  difficulty: "A1" | "A2" | "B1" | "B2"
+  tags: string[]
+}
+
+export type LearningStep = "WORD" | "PHRASE" | "SENTENCE";
+
+export interface ExerciseQuestion {
+    id: string;
+    wordId: string;
+    context: string;
+    sentence: string;
+    options: string[];
+    correctAnswer: string;
+}
