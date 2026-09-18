@@ -59,14 +59,6 @@ export const EXERCISE_DATA: ExerciseQuestion[] = [
   },
   {
     id: "ex8",
-    wordId: "v2",
-    context: "You studied hard and finally passed the exam.",
-    sentence: "After months of preparation, I managed to ____ success in the exam.",
-    options: ["achieve", "improve", "forget", "support"],
-    correctAnswer: "achieve"
-    },
-  {
-    id: "ex9",
     wordId: "v8",
     context: "The teacher wants the students to understand the lesson.",
     sentence: "She tried to ____ the grammar rules clearly.",
@@ -74,7 +66,7 @@ export const EXERCISE_DATA: ExerciseQuestion[] = [
     correctAnswer: "explain"
   },
   {
-    id: "ex10",
+    id: "ex19",
     wordId: "v9",
     context: "You are picking a career path.",
     sentence: "He had to ____ between becoming a doctor or an engineer.",
@@ -82,11 +74,91 @@ export const EXERCISE_DATA: ExerciseQuestion[] = [
     correctAnswer: "choose"
   },
   {
-    id: "ex11",
+    id: "ex10",
     wordId: "v10",
     context: "You want to share your ideas with your team.",
     sentence: "We need to ____ better to avoid misunderstandings.",
     options: ["communicate", "achieve", "decide", "create"],
     correctAnswer: "communicate"
+  },
+  {
+    id: "ex11",
+    wordId: "v11",
+    context: "You want to build a strong relationship with your team.",
+    sentence: "We need to ____ each other to work effectively.",
+    options: ["trust", "ignore", "compete", "decide"],
+    correctAnswer: "trust"
+  },
+  {
+    id: "ex12",
+    wordId: "v12",
+    context: "The manager wants the team to share updates regularly.",
+    sentence: "We must report our ____ every week in meetings.",
+    options: ["progress", "design", "create", "ignore"],
+    correctAnswer: "progress"
+  },
+  {
+    id: "ex13",
+    wordId: "v13",
+    context: "You want to explain your ideas clearly in class.",
+    sentence: "Students should learn how to express their ____ effectively.",
+    options: ["thoughts", "rules", "errors", "updates"],
+    correctAnswer: "thoughts"
+  },
+  {
+    id: "ex14",
+    wordId: "v14",
+    context: "The company wants to share its vision with employees.",
+    sentence: "Leaders need to set clear ____ for the organization.",
+    options: ["goals", "teams", "patients", "errors"],
+    correctAnswer: "goals"
+  },
+  {
+    id: "ex15",
+    wordId: "v15",
+    context: "You want to make sure instructions are clear.",
+    sentence: "Teachers should explain the classroom ____ to students.",
+    options: ["rules", "progress", "updates", "thoughts"],
+    correctAnswer: "rules"
+  },
+  {
+    id: "ex16",
+    wordId: "v16",
+    context: "The doctor wants to explain the treatment plan to the patient.",
+    sentence: "Doctors must listen carefully to their ____.",
+    options: ["patients", "teams", "goals", "errors"],
+    correctAnswer: "patients"
+  },
+  {
+    id: "ex17",
+    wordId: "v17",
+    context: "You want to share your feelings with a close friend.",
+    sentence: "It’s important to speak ____ with people you trust.",
+    options: ["honestly", "clearly", "quickly", "openly"],
+    correctAnswer: "honestly"
+  },
+  {
+    id: "ex18",
+    wordId: "v18",
+    context: "The team wants to avoid mistakes during the project.",
+    sentence: "We need to prevent ____ to ensure success.",
+    options: ["errors", "updates", "rules", "thoughts"],
+    correctAnswer: "errors"
+  },
+  {
+    id: "ex19",
+    wordId: "v19",
+    context: "You want to share important information quickly.",
+    sentence: "Employees should send urgent ____ immediately.",
+    options: ["updates", "rules", "progress", "teams"],
+    correctAnswer: "updates"
+  },
+  {
+    id: "ex20",
+    wordId: "v20",
+    context: "The coach wants players to work together on the field.",
+    sentence: "____ members must cooperate during the game to succeed.",
+    options: ["Team", "Goal", "Rule", "Error"],
+    correctAnswer: "Team"
   }
 ]

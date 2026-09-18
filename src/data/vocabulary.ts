@@ -405,22 +405,6 @@ export const VOCABULARY_DAILY: VocabularyDaily[] = [
   },
   {
     id: "v8",
-    word: "achieve",
-    pronunciation: "/əˈtʃiːv/",
-    partOfSpeech: "verb",
-    meanings: ["Đạt được", "Hoàn thành (mục tiêu)"],
-    commonPhrases: [
-      { phrase: "achieve success", meaning: "Đạt được thành công" },
-      { phrase: "sense of achievement", meaning: "Cảm giác thành tựu" }
-    ],
-    examples: [
-      { "sentence": "He achieved success in his career.", translation: "Anh ấy đã đạt được thành công trong sự nghiệp." }
-    ],
-    difficulty: "B1",
-    tags: ["success", "work"]
-  },
-  {
-    id: "v9",
     word: "explain",
     pronunciation: "/ɪkˈspleɪn/",
     partOfSpeech: "verb",
@@ -436,7 +420,7 @@ export const VOCABULARY_DAILY: VocabularyDaily[] = [
     tags: ["communication", "learning"]
   },
   {
-    id: "v10",
+    id: "v9",
     word: "choose",
     pronunciation: "/tʃuːz/",
     partOfSpeech: "verb",
@@ -452,7 +436,7 @@ export const VOCABULARY_DAILY: VocabularyDaily[] = [
     tags: ["decision", "life"]
   },
   {
-    id: "v11",
+    id: "v10",
     word: "communicate",
     pronunciation: "/kəˈmjuːnɪkeɪt/",
     partOfSpeech: "verb",
@@ -467,22 +451,169 @@ export const VOCABULARY_DAILY: VocabularyDaily[] = [
     difficulty: "B1",
     tags: ["communication", "skills"]
   },
+
   {
-    id: "v12",
-    word: "understand",
-    pronunciation: "/ˌʌndərˈstænd/",
-    partOfSpeech: "verb",
-    meanings: ["Hiểu"],
+    id: "v11",
+    word: "trust",
+    pronunciation: "/trʌst/",
+    partOfSpeech: "verb / noun",
+    meanings: ["Tin tưởng", "Niềm tin"],
     commonPhrases: [
-      { phrase: "understand the problem", meaning: "Hiểu vấn đề" },
-      { phrase: "easy to understand", meaning: "Dễ hiểu" }
+      { phrase: "build trust", meaning: "Xây dựng niềm tin" },
+      { phrase: "trust someone", meaning: "Tin tưởng ai đó" },
+      { phrase: "gain trust", meaning: "Giành được sự tin tưởng" }
     ],
     examples: [
-      { "sentence": "I understand what you mean.", translation: "Tôi hiểu ý bạn." }
+      { sentence: "Couples should trust each other.", translation: "Các cặp đôi nên tin tưởng lẫn nhau." },
+      { sentence: "It takes time to build trust.", translation: "Cần thời gian để xây dựng niềm tin." }
+    ],
+    difficulty: "B1",
+    tags: ["relationship", "confidence"]
+  },
+  {
+    id: "v12",
+    word: "progress",
+    pronunciation: "/ˈprəʊɡres/",
+    partOfSpeech: "noun",
+    meanings: ["Tiến bộ", "Sự phát triển"],
+    commonPhrases: [
+      { phrase: "make progress", meaning: "Đạt tiến bộ" },
+      { phrase: "track progress", meaning: "Theo dõi tiến độ" }
+    ],
+    examples: [
+      { sentence: "We must report our progress weekly.", translation: "Chúng ta phải báo cáo tiến độ hàng tuần." }
+    ],
+    difficulty: "B1",
+    tags: ["work", "development"]
+  },
+  {
+    id: "v13",
+    word: "thought",
+    pronunciation: "/θɔːt/",
+    partOfSpeech: "noun",
+    meanings: ["Suy nghĩ", "Ý tưởng"],
+    commonPhrases: [
+      { phrase: "share thoughts", meaning: "Chia sẻ suy nghĩ" },
+      { phrase: "deep thought", meaning: "Suy nghĩ sâu sắc" }
+    ],
+    examples: [
+      { sentence: "She expressed her thoughts clearly.", translation: "Cô ấy đã bày tỏ suy nghĩ của mình rõ ràng." }
+    ],
+    difficulty: "B1",
+    tags: ["ideas", "expression"]
+  },
+  {
+    id: "v14",
+    word: "goal",
+    pronunciation: "/ɡəʊl/",
+    partOfSpeech: "noun",
+    meanings: ["Mục tiêu", "Đích đến"],
+    commonPhrases: [
+      { phrase: "set goals", meaning: "Đặt mục tiêu" },
+      { phrase: "achieve goals", meaning: "Đạt được mục tiêu" }
+    ],
+    examples: [
+      { sentence: "Leaders need to communicate the goals.", translation: "Các nhà lãnh đạo cần truyền đạt mục tiêu." }
     ],
     difficulty: "A2",
-    tags: ["knowledge", "learning"]
+    tags: ["planning", "success"]
   },
+  {
+    id: "v15",
+    word: "rule",
+    pronunciation: "/ruːl/",
+    partOfSpeech: "noun",
+    meanings: ["Quy tắc", "Luật lệ"],
+    commonPhrases: [
+      { phrase: "follow rules", meaning: "Tuân theo quy tắc" },
+      { phrase: "set rules", meaning: "Đặt ra quy tắc" }
+    ],
+    examples: [
+      { sentence: "Teachers should explain the rules.", translation: "Giáo viên nên giải thích các quy tắc." }
+    ],
+    difficulty: "A2",
+    tags: ["education", "discipline"]
+  },
+  {
+    id: "v16",
+    word: "patient",
+    pronunciation: "/ˈpeɪʃnt/",
+    partOfSpeech: "noun",
+    meanings: ["Bệnh nhân"],
+    commonPhrases: [
+      { phrase: "treat patients", meaning: "Điều trị bệnh nhân" },
+      { phrase: "patient care", meaning: "Chăm sóc bệnh nhân" }
+    ],
+    examples: [
+      { sentence: "Doctors must communicate carefully with patients.", translation: "Bác sĩ phải giao tiếp cẩn thận với bệnh nhân." }
+    ],
+    difficulty: "A2",
+    tags: ["health", "medicine"]
+  },
+  {
+    id: "v17",
+    word: "honestly",
+    pronunciation: "/ˈɒnɪstli/",
+    partOfSpeech: "adverb",
+    meanings: ["Thành thật", "Chân thành"],
+    commonPhrases: [
+      { phrase: "speak honestly", meaning: "Nói một cách thành thật" },
+      { phrase: "honestly express feelings", meaning: "Thành thật bày tỏ cảm xúc" }
+    ],
+    examples: [
+      { sentence: "It’s important to talk honestly.", translation: "Điều quan trọng là nói chuyện một cách thành thật." }
+    ],
+    difficulty: "B1",
+    tags: ["emotion", "expression"]
+  },
+  {
+    id: "v18",
+    word: "error",
+    pronunciation: "/ˈerər/",
+    partOfSpeech: "noun",
+    meanings: ["Lỗi", "Sai sót"],
+    commonPhrases: [
+      { phrase: "prevent errors", meaning: "Ngăn ngừa lỗi" },
+      { phrase: "correct errors", meaning: "Sửa lỗi" }
+    ],
+    examples: [
+      { sentence: "We need to avoid errors in the project.", translation: "Chúng ta cần tránh lỗi trong dự án." }
+    ],
+    difficulty: "B1",
+    tags: ["work", "accuracy"]
+  },
+  {
+    id: "v19",
+    word: "update",
+    pronunciation: "/ˈʌpdeɪt/",
+    partOfSpeech: "noun / verb",
+    meanings: ["Cập nhật", "Thông báo mới"],
+    commonPhrases: [
+      { phrase: "urgent update", meaning: "Cập nhật khẩn cấp" },
+      { phrase: "software update", meaning: "Cập nhật phần mềm" }
+    ],
+    examples: [
+      { sentence: "Employees should share urgent updates immediately.", translation: "Nhân viên nên chia sẻ các cập nhật khẩn cấp ngay lập tức." }
+    ],
+    difficulty: "B1",
+    tags: ["information", "technology"]
+  },
+  {
+    id: "v20",
+    word: "team",
+    pronunciation: "/tiːm/",
+    partOfSpeech: "noun",
+    meanings: ["Đội", "Nhóm"],
+    commonPhrases: [
+      { phrase: "team members", meaning: "Thành viên trong nhóm" },
+      { phrase: "teamwork", meaning: "Làm việc nhóm" }
+    ],
+    examples: [
+      { sentence: "Team members must cooperate during the game.", translation: "Các thành viên trong đội phải hợp tác trong trận đấu." }
+    ],
+    difficulty: "A2",
+    tags: ["sports", "work"]
+  }
 ]
 
 export const ALL_VOCABULARY: Word[] = TOPICS.flatMap(topic => topic.words);
