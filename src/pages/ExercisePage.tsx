@@ -1,11 +1,22 @@
-// app/daily-learn/exercise/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import {
+  ArrowLeft,
+  Trophy,
+  RotateCcw,
+  Home,
+  ArrowRight,
+  BookOpen,
+  Award,
+} from "lucide-react";
 import { EXERCISE_DATA } from "@/data/exercise";
 import { VOCABULARY_DAILY } from "@/data/vocabulary";
 import WordCard from "@/components/WordCard";
+import ProgressBar from "@/components/ProgressBar";
+import ExerciseCard from "@/components/ExerciseCard";
 
 type Phase = "QUIZ" | "RESULT" | "REVIEW";
 
@@ -19,14 +30,14 @@ export default function ExercisePage() {
 
   const [score, setScore] = useState(0);
   const [incorrectWordIds, setIncorrectWordIds] = useState<string[]>([]);
-
   const [reviewIndex, setReviewIndex] = useState(0);
 
   const questions = EXERCISE_DATA;
   const currentQ = questions[currentIndex];
+  const progressPercent = questions.length > 0 ? (currentIndex / questions.length) * 100 : 0;
 
-  const handleCheck = () => {
-    if (!selectedOption) return;
+  const handleCheck = useCallback(() => {
+    if (!selectedOption || isChecked) return;
     setIsChecked(true);
 
     if (selectedOption === currentQ.correctAnswer) {
@@ -36,198 +47,309 @@ export default function ExercisePage() {
         setIncorrectWordIds((prev) => [...prev, currentQ.wordId]);
       }
     }
-  };
+  }, [selectedOption, isChecked, currentQ, incorrectWordIds]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
       setSelectedOption(null);
       setIsChecked(false);
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     } else {
       setPhase("RESULT");
     }
-  };
+  }, [currentIndex, questions.length]);
 
-  /* --------------------------------------------------------
-   * RENDER: 1. Fill-in-the-blank Test Interface
-   * -------------------------------------------------------- */
+  // Keyboard shortcut: Press Enter to check or go next
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (phase !== "QUIZ") return;
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (!isChecked && selectedOption) {
+          handleCheck();
+        } else if (isChecked) {
+          handleNext();
+        }
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [phase, isChecked, selectedOption, handleCheck, handleNext]);
+
+
   if (phase === "QUIZ") {
+    const isCorrectChoice = selectedOption === currentQ.correctAnswer;
+
     return (
-      <div className="max-w-xl mx-auto p-4 min-h-screen flex flex-col justify-center">
-        <div className="mb-8">
-          <p className="text-sm font-medium text-gray-500 mb-2">
-            Question {currentIndex + 1} of {questions.length}
-          </p>
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-blue-600 h-2 rounded-full transition-all"
-              style={{ width: `${(currentIndex / questions.length) * 100}%` }}
-            ></div>
-          </div>
-        </div>
+      <div className="min-h-dvh flex flex-col justify-between bg-slate-50 text-slate-800 selection:bg-indigo-100">
+        {/* Top App Bar */}
+        <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+            <Link
+              href="/daily-learn/learn"
+              className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 px-3 py-2 rounded-lg transition-all"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="hidden sm:inline">Xem lại từ</span>
+            </Link>
 
-        <div className="bg-white rounded-3xl border-2 border-gray-100 p-6 md:p-8 shadow-sm flex-1">
-          <div className="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-100">
-            <p className="text-gray-600 italic">
-              &quot;{currentQ.context}&quot;
-            </p>
-          </div>
-
-          <h2 className="text-2xl font-bold text-gray-800 mb-8 leading-relaxed">
-            {currentQ.sentence.split("____").map((part, i, arr) => (
-              <span key={i}>
-                {part}
-                {i < arr.length - 1 && (
-                  <span className="inline-block w-24 border-b-2 border-black mx-2 translate-y-1" />
-                )}
+            <div className="text-center">
+              <span className="text-sm font-bold text-slate-800">
+                Câu hỏi {currentIndex + 1} / {questions.length}
               </span>
-            ))}
-          </h2>
+            </div>
 
-          <div className="grid grid-cols-1 gap-3">
-            {currentQ.options.map((option) => {
-              const isSelected = selectedOption === option;
-              const isCorrect = option === currentQ.correctAnswer;
-
-              let btnClass =
-                "border-2 border-gray-200 text-gray-700 hover:border-blue-400 hover:bg-blue-50";
-              if (isChecked) {
-                if (isCorrect)
-                  btnClass =
-                    "border-2 border-green-500 bg-green-50 text-green-700 font-bold";
-                else if (isSelected && !isCorrect)
-                  btnClass = "border-2 border-red-500 bg-red-50 text-red-700";
-                else
-                  btnClass =
-                    "border-2 border-gray-100 text-gray-400 opacity-50";
-              } else if (isSelected) {
-                btnClass =
-                  "border-2 border-blue-500 bg-blue-50 text-blue-700 font-bold";
-              }
-
-              return (
-                <button
-                  key={option}
-                  disabled={isChecked}
-                  onClick={() => setSelectedOption(option)}
-                  className={`p-4 rounded-xl text-left text-lg transition-all ${btnClass}`}
-                >
-                  {option}
-                </button>
-              );
-            })}
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-200/80 text-xs sm:text-sm font-bold font-mono">
+              <Trophy className="w-4 h-4 text-amber-600" />
+              <span>{score} điểm</span>
+            </div>
           </div>
-        </div>
 
-        <div className="mt-8">
-          {!isChecked ? (
-            <button
-              onClick={handleCheck}
-              disabled={!selectedOption}
-              className="w-full py-4 bg-black text-white rounded-xl font-bold text-lg disabled:opacity-30 disabled:bg-gray-400 transition-colors"
-            >
-              Check Answer
-            </button>
-          ) : (
-            <button
-              onClick={handleNext}
-              className="w-full py-4 bg-green-600 text-white rounded-xl font-bold text-lg hover:bg-green-700 transition-colors"
-            >
-              Continue
-            </button>
-          )}
-        </div>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-1">
+            <ProgressBar progress={progressPercent} height="h-1.5" />
+          </div>
+        </header>
+
+        {/* Quiz Body: Expands across max-w-5xl */}
+        <main className="flex-1 flex items-stretch justify-center p-0 sm:items-center sm:p-5 md:p-8">
+          <div className="w-full max-w-5xl mx-auto">
+            <ExerciseCard
+              question={currentQ}
+              selectedOption={selectedOption}
+              isChecked={isChecked}
+              onSelectOption={setSelectedOption}
+            />
+          </div>
+        </main>
+
+        {/* Bottom Action Bar */}
+        <footer className="sticky bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200/80 p-3 sm:p-4">
+          <div className="max-w-5xl mx-auto flex items-center justify-end">
+            {!isChecked ? (
+              <button
+                type="button"
+                onClick={handleCheck}
+                disabled={!selectedOption}
+                className="w-full sm:w-auto sm:min-w-50 py-3.5 px-8 rounded-lg font-bold text-base text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed shadow-xs active:scale-98 transition-all cursor-pointer"
+              >
+                Kiểm tra đáp án
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleNext}
+                className={`w-full sm:w-auto sm:min-w-50 flex items-center justify-center gap-2 py-3.5 px-8 rounded-lg font-bold text-base text-white shadow-xs active:scale-98 transition-all cursor-pointer ${isCorrectChoice
+                  ? "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-100"
+                  : "bg-indigo-600 hover:bg-indigo-700 shadow-indigo-100"
+                  }`}
+              >
+                <span>
+                  {currentIndex === questions.length - 1
+                    ? "Xem kết quả"
+                    : "Câu tiếp theo"}
+                </span>
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            )}
+          </div>
+        </footer>
       </div>
     );
   }
 
   /* --------------------------------------------------------
-   * RENDER: 2. INTERFACE RESULT
+   * 2. PHASE RESULT
    * -------------------------------------------------------- */
   if (phase === "RESULT") {
-    const accuracy = Math.round((score / questions.length) * 100);
+    const totalQ = questions.length;
+    const accuracy = totalQ > 0 ? Math.round((score / totalQ) * 100) : 0;
+    const hasMistakes = incorrectWordIds.length > 0;
 
     return (
-      <div className="max-w-md mx-auto p-4 min-h-screen flex items-center justify-center">
-        <div className="w-full border-4 border-black p-8 rounded-2xl bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-center font-mono">
-          <h2 className="text-2xl font-black uppercase tracking-widest border-b-4 border-black pb-4 mb-6">
-            Today&apos;s Result
-          </h2>
+      <div className="min-h-dvh flex flex-col items-center justify-center bg-white text-zinc-900 p-4 sm:p-6 font-sans selection:bg-emerald-500/30">
 
-          <div className="text-5xl font-black mb-2">
-            {score} / {questions.length}
-          </div>
-          <div className="text-xl font-bold text-gray-500 mb-8">
-            {accuracy}% Accuracy
-          </div>
+        {/* Container chính: Viền vuông vức, không đổ bóng, giống một tờ báo cáo */}
+        <div className="w-full max-w-xl bg-white border-2 border-zinc-900 flex flex-col relative">
 
-          <div className="text-left font-bold text-lg space-y-3 mb-10 border-t-2 border-dashed border-gray-300 pt-6">
-            <p>Words learned: 40</p>
-            <p
-              className={
-                incorrectWordIds.length > 0 ? "text-red-600" : "text-green-600"
-              }
-            >
-              Words to review: {incorrectWordIds.length}
+          {/* Header: Badge & Tiêu đề */}
+          <div className="p-8 sm:p-10 text-center flex flex-col items-center border-b-2 border-zinc-900 bg-[linear-gradient(to_right,#f4f4f5_1px,transparent_1px),linear-gradient(to_bottom,#f4f4f5_1px,transparent_1px)] bg-size-[16px_16px]">
+            <div className="w-16 h-16 bg-zinc-900 text-white flex items-center justify-center mb-6">
+              <Award className="w-8 h-8" />
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl font-black uppercase tracking-tight mb-3">
+              Tổng Kết Bài Học
+            </h1>
+            <p className="text-zinc-600 text-sm font-medium">
+              {accuracy >= 80
+                ? "Xuất sắc! Bạn đã nắm rất vững kiến thức hôm nay."
+                : accuracy >= 50
+                  ? "Khá tốt! Hãy ôn lại các từ chưa đúng để nhớ sâu hơn."
+                  : "Đừng nản lòng, việc ôn tập sẽ giúp bạn tiến bộ vượt bậc!"}
             </p>
           </div>
 
-          {incorrectWordIds.length > 0 ? (
+          {/* Thông số (Score & Accuracy): Sử dụng Grid và Border chia ô */}
+          <div className="grid grid-cols-2 divide-x-2 divide-zinc-900 border-b-2 border-zinc-900 bg-zinc-50">
+            <div className="p-8 flex flex-col items-center justify-center">
+              <div className="text-5xl sm:text-6xl font-black font-mono text-zinc-900 tracking-tighter">
+                {score}<span className="text-3xl text-zinc-400">/{totalQ}</span>
+              </div>
+              <div className="text-xs font-bold uppercase tracking-widest text-zinc-500 mt-2">
+                Điểm số
+              </div>
+            </div>
+            <div className="p-8 flex flex-col items-center justify-center">
+              <div className="text-5xl sm:text-6xl font-black font-mono tracking-tighter text-emerald-600">
+                {accuracy}%
+              </div>
+              <div className="text-xs font-bold uppercase tracking-widest text-zinc-500 mt-2">
+                Độ chính xác
+              </div>
+            </div>
+          </div>
+
+          {/* Chi tiết từ vựng (Stats Breakdown): Dạng danh sách kẻ ngang */}
+          <div className="flex flex-col bg-white">
+            <div className="flex items-center justify-between px-8 py-5 border-b-2 border-zinc-900">
+              <span className="text-sm font-bold uppercase tracking-wider text-zinc-600">
+                Từ vựng học hôm nay
+              </span>
+              <span className="text-lg font-black font-mono text-zinc-900">
+                {totalQ}
+              </span>
+            </div>
+            <div className="flex items-center justify-between px-8 py-5 border-b-2 border-zinc-900 bg-zinc-50">
+              <span className="text-sm font-bold uppercase tracking-wider text-zinc-600">
+                Từ cần ôn tập lại
+              </span>
+              <span
+                className={`text-lg font-black font-mono ${hasMistakes ? "text-rose-600" : "text-emerald-600"
+                  }`}
+              >
+                {incorrectWordIds.length}
+              </span>
+            </div>
+          </div>
+
+          {/* Hành động (Action Buttons): Nút bấm vuông vức, tràn viền */}
+          <div className="flex flex-col sm:flex-row divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-zinc-900 bg-white">
+            {hasMistakes ? (
+              <button
+                type="button"
+                onClick={() => setPhase("REVIEW")}
+                className="flex-1 py-5 px-4 bg-zinc-900 text-white hover:bg-zinc-800 font-bold uppercase tracking-wider text-sm flex items-center justify-center gap-3 transition-colors cursor-pointer group"
+              >
+                <RotateCcw className="w-5 h-5 group-hover:-rotate-90 transition-transform duration-300" />
+                <span>Ôn Lại Lỗi Sai</span>
+              </button>
+            ) : null}
+
             <button
-              onClick={() => setPhase("REVIEW")}
-              className="w-full py-3 border-2 border-black font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-colors"
-            >
-              [ Review {incorrectWordIds.length} words ]
-            </button>
-          ) : (
-            <button
+              type="button"
               onClick={() => router.push("/")}
-              className="w-full py-3 bg-black text-white font-bold uppercase tracking-wider"
+              className={`flex-1 py-5 px-4 font-bold uppercase tracking-wider text-sm flex items-center justify-center gap-3 transition-colors cursor-pointer ${hasMistakes
+                ? "bg-white text-zinc-900 hover:bg-zinc-100" // Nút phụ nếu có lỗi sai
+                : "bg-emerald-500 text-zinc-950 hover:bg-emerald-400" // Nút chính nếu đã hoàn hảo
+                }`}
             >
-              [ Back to Home ]
+              <Home className="w-5 h-5" />
+              <span>Về Trang Chủ</span>
             </button>
-          )}
+          </div>
+
         </div>
       </div>
     );
   }
 
   /* --------------------------------------------------------
-   * RENDER: 3. Review Mistakes
+   * 3. PHASE REVIEW: Ôn tập lại từ vựng làm sai
    * -------------------------------------------------------- */
   if (phase === "REVIEW") {
     const reviewWords = VOCABULARY_DAILY.filter((w) =>
       incorrectWordIds.includes(w.id),
     );
-    const currentReviewWord = reviewWords[reviewIndex];
+    const currentReviewWord = reviewWords[reviewIndex] || reviewWords[0];
+    const totalReview = reviewWords.length;
 
     const handleNextReview = () => {
-      if (reviewIndex < reviewWords.length - 1) {
+      if (reviewIndex < totalReview - 1) {
         setReviewIndex((prev) => prev + 1);
+        if (typeof window !== "undefined") {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       } else {
         router.push("/");
       }
     };
 
     return (
-      <div className="max-w-2xl mx-auto p-4 min-h-screen flex flex-col pt-10">
-        <h2 className="text-2xl font-bold text-red-600 mb-6 text-center">
-          Let&apos;s review this word!
-        </h2>
-        <div className="flex-1">
-          <WordCard vocabulary={currentReviewWord} />
-        </div>
-        <div className="mt-8 pb-8">
-          <button
-            onClick={handleNextReview}
-            className="w-full py-4 bg-black text-white rounded-xl font-bold text-lg hover:bg-gray-800 transition-colors"
-          >
-            {reviewIndex === reviewWords.length - 1
-              ? "Finish Review"
-              : "Next Word"}
-          </button>
-        </div>
+      <div className="min-h-dvh flex flex-col justify-between bg-slate-50 text-slate-800">
+        {/* Top App Bar */}
+        <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+            <button
+              type="button"
+              onClick={() => setPhase("RESULT")}
+              className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 px-3 py-2 rounded-lg transition-all cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Kết quả</span>
+            </button>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs sm:text-sm font-bold text-rose-800 bg-rose-50 border border-rose-200/80 px-3 py-1.5 rounded-lg font-mono">
+                Ôn tập {reviewIndex + 1} / {totalReview}
+              </span>
+            </div>
+          </div>
+
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-1">
+            <ProgressBar
+              progress={totalReview > 0 ? ((reviewIndex + 1) / totalReview) * 100 : 100}
+              height="h-1.5"
+            />
+          </div>
+        </header>
+
+        {/* Review Content: Uses full-screen expansive WordCard */}
+        <main className="flex-1 flex items-stretch justify-center p-0 sm:items-center sm:p-5 md:p-8">
+          <div className="w-full max-w-6xl mx-auto">
+            <div className="mb-4 text-center">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-rose-50 text-rose-700 text-xs font-bold border border-rose-100">
+                <BookOpen className="w-3.5 h-3.5" />
+                Ôn lại để ghi nhớ sâu hơn
+              </span>
+            </div>
+
+            {currentReviewWord && <WordCard vocabulary={currentReviewWord} />}
+          </div>
+        </main>
+
+        {/* Bottom Review Action */}
+        <footer className="sticky bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200/80 p-3 sm:p-4">
+          <div className="max-w-6xl mx-auto flex items-center justify-end">
+            <button
+              type="button"
+              onClick={handleNextReview}
+              className="w-full sm:w-auto sm:min-w-50 flex items-center justify-center gap-2 py-3.5 px-8 rounded-lg font-bold text-base text-white bg-indigo-600 hover:bg-indigo-700 shadow-xs active:scale-98 transition-all cursor-pointer"
+            >
+              <span>
+                {reviewIndex === totalReview - 1
+                  ? "Hoàn thành ôn tập"
+                  : "Từ tiếp theo"}
+              </span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </footer>
       </div>
     );
   }
+
+  return null;
 }

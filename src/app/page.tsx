@@ -5,7 +5,6 @@ import {
   BrainCircuit,
   ShieldCheck,
   Map,
-  Terminal,
   ArrowRight,
   Flame,
   Swords,
@@ -39,7 +38,13 @@ export default function LingoHubLanding() {
               Hệ Sinh Thái
             </Link>
             <Link
-              href="/word-blaster"
+              href="/daily-learn/learn"
+              className="text-emerald-400 hover:text-emerald-300 font-bold transition-colors"
+            >
+              Học Hàng Ngày
+            </Link>
+            <Link
+              href="/game"
               className="text-white hover:text-emerald-400 transition-colors"
             >
               Vào Game
@@ -68,13 +73,71 @@ export default function LingoHubLanding() {
             hợp nhất để biến Tiếng Anh thành phản xạ tự nhiên.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <button className="px-8 py-5 bg-emerald-500 text-zinc-950 font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:bg-emerald-400 transition-all">
-              Tạo Nhân Vật Ngay <ArrowRight className="w-5 h-5" />
-            </button>
-            <button className="px-8 py-5 bg-transparent border-2 border-zinc-700 text-white font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:border-zinc-500 transition-all">
-              <Terminal className="w-5 h-5" />
-              Xem Lộ Trình
-            </button>
+            <Link
+              href="/daily-learn/learn"
+              className="px-8 py-5 bg-emerald-500 text-zinc-950 font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:bg-emerald-400 transition-all"
+            >
+              Bắt Đầu Học Hôm Nay <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link
+              href="/game"
+              className="px-8 py-5 bg-transparent border-2 border-zinc-700 text-white font-bold uppercase tracking-widest text-sm flex items-center justify-center gap-3 hover:border-zinc-500 transition-all"
+            >
+              <Gamepad2 className="w-5 h-5 text-emerald-400" />
+              Chọn Game
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ⚡ LỐI VÀO CHÍNH */}
+      <section className="border-b border-zinc-800 bg-zinc-900/40">
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="mb-7 flex items-end justify-between gap-6">
+            <div>
+              <p className="text-xs font-mono font-bold uppercase tracking-[0.22em] text-emerald-400 mb-2">
+                Chọn hành trình
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-black text-white">
+                Bạn muốn bắt đầu thế nào?
+              </h2>
+            </div>
+            <span className="hidden sm:block text-sm text-zinc-500">10–15 phút mỗi ngày</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 border border-zinc-800 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+            <Link
+              href="/daily-learn/learn"
+              className="group p-6 sm:p-8 bg-zinc-950/30 hover:bg-emerald-500 transition-colors"
+            >
+              <div className="flex items-start justify-between gap-5">
+                <div className="w-11 h-11 shrink-0 border border-emerald-500/40 bg-emerald-500/10 flex items-center justify-center text-emerald-400 group-hover:bg-zinc-950 group-hover:text-emerald-400 group-hover:border-zinc-950 transition-colors">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <ArrowRight className="w-5 h-5 text-emerald-400 group-hover:text-zinc-950 group-hover:translate-x-1 transition-all" />
+              </div>
+              <p className="mt-8 text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 group-hover:text-zinc-950 transition-colors">Daily learn</p>
+              <h3 className="mt-2 text-2xl font-black text-white group-hover:text-zinc-950 transition-colors">Học hôm nay</h3>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-zinc-400 group-hover:text-zinc-800 transition-colors">
+                Học 10 từ vựng, xem ngữ cảnh và kiểm tra phản xạ trong một luồng ngắn gọn.
+              </p>
+            </Link>
+
+            <Link
+              href="/game"
+              className="group p-6 sm:p-8 bg-zinc-950/30 hover:bg-cyan-500 transition-colors"
+            >
+              <div className="flex items-start justify-between gap-5">
+                <div className="w-11 h-11 shrink-0 border border-cyan-500/40 bg-cyan-500/10 flex items-center justify-center text-cyan-400 group-hover:bg-zinc-950 group-hover:text-cyan-400 group-hover:border-zinc-950 transition-colors">
+                  <Gamepad2 className="w-5 h-5" />
+                </div>
+                <ArrowRight className="w-5 h-5 text-cyan-400 group-hover:text-zinc-950 group-hover:translate-x-1 transition-all" />
+              </div>
+              <p className="mt-8 text-xs font-mono font-bold uppercase tracking-widest text-cyan-400 group-hover:text-zinc-950 transition-colors">Game library</p>
+              <h3 className="mt-2 text-2xl font-black text-white group-hover:text-zinc-950 transition-colors">Chọn game để chơi</h3>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-zinc-400 group-hover:text-zinc-800 transition-colors">
+                Vào thư viện game, chọn thử thách phù hợp và luyện tiếng Anh qua từng lượt chơi.
+              </p>
+            </Link>
           </div>
         </div>
       </section>
@@ -210,10 +273,22 @@ export default function LingoHubLanding() {
               tìm đúng cách tiếp cận.&quot;
             </p>
           </div>
-          <button className="px-10 py-6 bg-zinc-950 text-white font-black uppercase tracking-widest text-lg flex items-center justify-center gap-4 hover:bg-zinc-800 transition-all shrink-0 w-full md:w-auto">
-            <Gamepad2 className="w-6 h-6 text-emerald-500" />
-            Đăng Ký Chơi Thử
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+            <Link
+              href="/daily-learn/learn"
+              className="px-8 py-5 bg-zinc-950 text-white font-black uppercase tracking-widest text-base flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all shrink-0"
+            >
+              <Zap className="w-5 h-5 text-emerald-400" />
+              Bắt Đầu Học Ngay
+            </Link>
+            <Link
+              href="/game"
+              className="px-8 py-5 bg-emerald-600 text-zinc-950 font-black uppercase tracking-widest text-base flex items-center justify-center gap-3 hover:bg-emerald-400 transition-all border-2 border-zinc-950 shrink-0"
+            >
+              <Gamepad2 className="w-5 h-5 text-zinc-950" />
+              Chọn Game
+            </Link>
+          </div>
         </div>
       </section>
       {/* FOOTER */}
